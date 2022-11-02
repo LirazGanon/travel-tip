@@ -6,6 +6,10 @@
     align-self: center;
 }
 
+.logo{
+    padding-inline-start:10px ;
+}
+
 .burger {
     height: 90px;
     width: 90px;

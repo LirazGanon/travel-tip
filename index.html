@@ -10,7 +10,7 @@
 
     <header class="main-header main-layout full">
         <section class="flex space-between align-center">
-            <h1>TravelTip BOSS</h1>
+            <h1 class="logo">TravelTip</h1>
            
             <div class="burger"  onclick="onMenu()">
             <span style="--i: -1"></span>
@@ -20,34 +20,37 @@
         </section>
     </header>
 
-    <section class="search-locations">
-        <form onsubmit="//@">
+    <section class="search-locations main-layout full">
+        <form onsubmit="//@" class="flex center">
             <input type="search" name="search" placeholder="Enter Location">
-            <button>GO</button>
+            <button class="flex center"><ion-icon name="search"></ion-icon></button>
         </form>
     </section>
 
-    <main class="main-content">
+    <main class="main-content main-layout full">
 
-        <section class="weather-locations">
+        <section class="weather-locations main-layout">
             <article class="weather flex col align-center">
                 <img src="./img/sun.png" alt="">
                 <h2>The weather at <span class="location">Tokyo</span> is <span class="celsius">32c</span></h2>
             </article>
 
-            <section class="locations">
+            <section class="locations flex col">
                 <button>My Location</button>
                 <ul class="locations-list">
-                    <li class="location-items">
+                    <!-- Render -->
+                    <li class="location-items flex space-between align-center">
                         <h2>${user input}</h2>
-                        <button>move</button>
-                        <button>delete</button>
+                        <div class="controls flex">
+                            <button class="flex center" onclick="pal"><ion-icon name="navigate"></ion-icon></button>
+                            <button class="flex center" onclick="deleteee()"><ion-icon name="trash"></ion-icon></button>
+                        </div>
                     </li>
                 </ul>
             </section>
         </section>
 
-        <div id="map" style="width: 100%; height: 400px;"></div>
+        <div id="map"></div>
 
         <section class="interactions">
             <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
@@ -67,7 +70,8 @@
         <small>right reserved &copy;</small>
     </footer>
     
-
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script type="module" src="js/app.controller.js"></script>
 </body>
 </html>

@@ -7,3 +7,5 @@
 @import './cmp/main.css';
 @import './cmp/locations.css';
 @import './cmp/footer.css';
+@import './media/tablet.css' (min-width: 800px);
+@import './media/desktop.css'(min-width: 1000px);
