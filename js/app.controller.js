@@ -118,13 +118,20 @@ function renderPlaces() {
     }).join('')
 
     renderWeather(places[0])
-    // console.log('strHtmls', strHtmls);
     elList.innerHTML = strHtmls
 }
 
-function renderWeather({ name, weather: temp }) {
-    document.querySelector('.location').innerText = name
-    document.querySelector('.celsius').innerText = temp + '°'
+
+function renderWeather({ name, lat, lng }) {
+    mapService.askForWeather(lat, lng).then(res => {
+        const temp = Math.round(res.temp)
+        const { icon, description } = (res.weather[0])
+
+        document.querySelector('.location').innerText = name
+        document.querySelector('.celsius').innerText = temp + '°'
+        document.querySelector('.weather img').src = `http://openweathermap.org/img/wn/${icon}@2x.png`
+        document.querySelector('.weather-desc').innerText = description
+    })
 }
 
 

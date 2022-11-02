@@ -9,7 +9,8 @@ export const mapService = {
     addPlace,
     getPlaces,
     removePlace,
-    getPlaceById
+    getPlaceById,
+    askForWeather
 }
 
 
@@ -75,14 +76,17 @@ function _connectGoogleApi() {
 }
 
 function getMap() {
-    console.log(gMap)
     return gMap
 }
 
 function addPlace(name, lat, lng, zoom) {
     console.log(name, lat, lng, zoom)
-    gPlaces.unshift({ id: utilService.makeId(), lat, lng, name, zoom, weather: utilService.getRandomInt(25, 36), createdAt: Date.now(), updatedAt: Date.now() })
-    _savePlacesToStorage()
+    const currPlace = { id: utilService.makeId(), lat, lng, name, zoom, createdAt: Date.now(), updatedAt: Date.now() }
+    gPlaces.unshift(currPlace)
+    askForWeather(lat, lng).then(res => {
+        currPlace.weather = Math.round(res.temp)
+        _savePlacesToStorage()
+    })
 }
 
 function removePlace(placeId) {
@@ -95,21 +99,40 @@ function _createPlaces() {
     if (!places || !places.length) {
         for (let i = 0; i < 3; i++) {
             const placeName = 'DemoPlace' + (i + 1)
-            places.push(_createPlace(placeName, 32 + i * 0.1, 35 + i * 0.1, 10))
+            const currPlace = _createPlace(placeName, 32 + i * 0.1, 35 + i * 0.1, 10)
+            places.push(currPlace)
+            askForWeather(32 + i * 0.1, 35 + i * 0.1).then(res => {
+                currPlace.weather = Math.round(res.temp)
+                _savePlacesToStorage()
+            })
         }
     }
-
-    function _createPlace(name, lat, lng, zoom) {
-        return { id: utilService.makeId(), lat, lng, name, zoom, weather: utilService.getRandomInt(25, 36), createdAt: Date.now(), updatedAt: Date.now() }
-    }
-
-
     gPlaces = places
-    _savePlacesToStorage()
+}
+
+function _createPlace(name, lat, lng, zoom) {
+    return { id: utilService.makeId(), lat, lng, name, zoom, createdAt: Date.now(), updatedAt: Date.now() }
 }
 
 function _savePlacesToStorage() {
     storageService.save(STORAGE_KEY_PLACES, gPlaces)
 }
 
+
+function askForWeather(lat, lng) {
+    const API = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=65505f532c6a14c573f169722f2b0004`
+    return axios.get(API).then(({ data }) => {
+        let results = {
+            temp: data.list[0].main.temp - 272.15,
+            weather: data.list[0].weather
+        }
+        return results
+    })
+}
+
+function askForLocation(lat,lon){
+    const API = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=AIzaSyB-AIzaSyBTX43qLb5Eha5DhsfCtwbNURcj3m2qqRw`
+    
+    return axios.get(API).then(console.log)
+}
 
