@@ -1,5 +1,5 @@
 .main-layout>*:not(.full) {
-    max-width: var(--l);
+    max-width: var(--m);
     margin-left: auto;
     margin-right: auto;
 }
@@ -7,8 +7,4 @@
 .main-content{
     display: flex;
     gap: 20px;
-}
-
-.locations{
-    
 }

@@ -10,3 +10,4 @@
 @import './cmp/modal.css';
 @import './media/tablet.css' (min-width: 800px);
 @import './media/desktop.css'(min-width: 1000px);
+@import './media/xl.css'(min-width: 1220px);

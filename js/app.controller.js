@@ -92,7 +92,7 @@ function renderPlaces() {
         `
     }).join('')
 
-    renderWeather(places[0])
+    // renderWeather(places[0])
     // console.log('strHtmls', strHtmls);
     elList.innerHTML = strHtmls
 }
