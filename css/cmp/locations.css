@@ -57,13 +57,15 @@
 
 .locations-list>* {
     width: 100%;
-
 }
 
 .location-items {
     padding-inline: 10px;
-    /* background: red; */
     min-height: 70px;
+}
+
+.location-items:not(:last-child){
+    border-bottom: 1px solid var(--grey3);
 }
 
 .controls {

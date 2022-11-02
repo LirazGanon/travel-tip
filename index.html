@@ -77,9 +77,10 @@
 
     <section class="modal full flex center">
         <article class="add-pointer">
-            <form onsubmit="//@" class="add-form flex col align-center">
+            <form onsubmit="onAddPlace(event)" class="add-form flex col align-center">
                 <label class="add-input">
-                    <input type="text" placeholder="My Location" required>
+                    <input type="text" placeholder="My Location"
+                    name="placeName" required>
                 </label>
                 <button class="flex center">Save Point</button>
             </form>
