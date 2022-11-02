@@ -1,0 +1,77 @@
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    overflow: hidden;
+    /* width: 100%; */
+    background: #3335;
+    transition: width .5s;
+}
+
+body.modal-open .modal{
+    width: 100%;
+}
+
+.add-pointer{
+    position: absolute;
+    top: 30%;
+    height: 150px;
+    width: 350px;
+    background: var(--bg);
+    border-radius: 13px ;
+}
+
+.add-pointer>button{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    padding: 2px 6px;
+    background: var(--grey3);
+    color: var(--bg);
+}
+
+.add-form{
+   height: 100%;
+   width: 100%;
+   justify-content: flex-end;
+   position: relative;
+}
+
+.add-form>label{
+    margin-block-end: 25px;
+}
+
+.add-form>label>input{
+    font-size: 1.2em;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid var(--grey3);
+    background: transparent;
+    padding: 2px 5px;
+}
+
+.add-form>button{
+    margin-block-end: 15px;
+    padding: 4px 12px;
+    border-radius: 2em;
+    color: var(--bg);
+}
+
+.add-form::after{
+    content: '';
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    transform: rotate(45deg);
+    bottom:-12px ;
+    left: 10%;
+    background: var(--bg);
+    border-radius: 4px;
+}
+
+.interactions{
+    position: absolute;
+    bottom: 30%;
+}

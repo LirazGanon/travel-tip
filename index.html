@@ -6,7 +6,7 @@
     <title>TravelTip</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="flex col main-layout">
+<body class="flex col main-layout ">
 
     <header class="main-header main-layout full">
         <section class="flex space-between align-center">
@@ -27,12 +27,16 @@
         </form>
     </section>
 
-    <main class="main-content main-layout full">
+    <main class="main-content">
 
-        <section class="weather-locations main-layout">
+        <section class="weather-locations">
             <article class="weather flex col align-center">
                 <img src="./img/sun.png" alt="">
-                <h2>The weather at <span class="location">Tokyo</span> is <span class="celsius">32c</span></h2>
+                <h2>The weather at 
+                    <span class="location">Tokyo</span>
+                     is 
+                     <span class="celsius">32c</span>
+                    </h2>
             </article>
 
             <section class="locations flex col">
@@ -51,7 +55,7 @@
         </section>
 
         <div id="map"></div>
-
+        
         <section class="interactions">
             <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
             <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
@@ -70,6 +74,19 @@
         <small>right reserved &copy;</small>
     </footer>
     
+
+    <section class="modal full flex center">
+        <article class="add-pointer">
+            <form onsubmit="//@" class="add-form flex col align-center">
+                <label class="add-input">
+                    <input type="text" placeholder="My Location" required>
+                </label>
+                <button class="flex center">Save Point</button>
+            </form>
+            <button>X</button>
+        </article>
+    </section>
+
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script type="module" src="js/app.controller.js"></script>
