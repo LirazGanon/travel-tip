@@ -6,7 +6,6 @@ window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
-window.onMenu = onMenu
 function onInit() {
     mapService.initMap()
         .then(() => {
@@ -52,7 +51,3 @@ function onPanTo() {
     mapService.panTo(35.6895, 139.6917)
 }
 
-
-function onMenu() {
-    document.querySelector('body').classList.toggle('menu-open')
-    }
