@@ -7,7 +7,9 @@ export const mapService = {
     panTo,
     getMap,
     addPlace,
-    getPlaces
+    getPlaces,
+    removePlace,
+    getPlaceById
 }
 
 
@@ -51,6 +53,11 @@ function panTo(lat, lng) {
     gMap.panTo(laLatLng)
 }
 
+function getPlaceById(placeId) {
+    return gPlaces.find(p => p.id === placeId)
+}
+
+
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
@@ -75,6 +82,11 @@ function getMap() {
 function addPlace(name, lat, lng, zoom) {
     console.log(name, lat, lng, zoom)
     gPlaces.unshift({ id: utilService.makeId(), lat, lng, name, zoom, weather: utilService.getRandomInt(25, 36), createdAt: Date.now(), updatedAt: Date.now() })
+    _savePlacesToStorage()
+}
+
+function removePlace(placeId) {
+    gPlaces = gPlaces.filter(p => p.id !== placeId)
     _savePlacesToStorage()
 }
 

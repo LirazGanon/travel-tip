@@ -10,6 +10,9 @@ window.onMenu = onMenu
 window.onAddPlace = onAddPlace
 window.onCloseModal = onCloseModal
 window.omModalClick = omModalClick
+window.onRemovePlace = onRemovePlace
+window.onPanToPlace = onPanToPlace
+window.onPanToUserLoc = onPanToUserLoc
 
 
 
@@ -25,6 +28,11 @@ function onInit() {
             addEventListeners()
             renderPlaces()
             renderMarkers()
+            const locationButton = document.createElement('button')
+            locationButton.classList.add('my-location')
+            locationButton.innerHTML = `<img src="img/my-location.png" />`
+            gMap.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(locationButton)
+            locationButton.addEventListener('click', onPanToUserLoc)
         })
         .catch(() => console.log('Error: cannot init map'))
 }
@@ -135,10 +143,35 @@ function renderMarkers() {
     })
 }
 
-function onCloseModal(){
+function onRemovePlace(placeId) {
+    console.log('placeId', placeId);
+    mapService.removePlace(placeId)
+    renderPlaces()
+    renderMarkers()
+}
+
+function onPanToPlace(placeId) {
+    const selectedPlace = mapService.getPlaceById(placeId)
+    renderWeather(selectedPlace)
+    gMap.setCenter({ lat: selectedPlace.lat, lng: selectedPlace.lng })
+    gMap.setZoom(selectedPlace.zoom)
+}
+
+function onPanToUserLoc() {
+    navigator.geolocation.getCurrentPosition(setCenterToUserLoc)
+}
+
+function setCenterToUserLoc({ coords }) {
+    const { latitude: lat, longitude: lng } = coords
+    console.log('lat,lng', lat, lng);
+    gMap.setCenter({ lat, lng })
+}
+
+
+function onCloseModal() {
     document.querySelector('body').classList.remove('modal-open')
 }
 
-function omModalClick(ev){
+function omModalClick(ev) {
     ev.stopPropagation()
 }
