@@ -1,13 +1,12 @@
 .map{
     width: 100%;
     min-height: 600px;
+    max-height: 1000px;
     height: auto;
-    /* flex: 1; */
 }
 
 .main-content{
     width: 100%;
-    /* flex: 1; */
 }
 
 .my-location{
