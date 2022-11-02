@@ -8,3 +8,8 @@
     display: flex;
     gap: 20px;
 }
+.locations {
+    overflow-y: auto;
+    max-height: 400px;
+    min-width: 300px;
+}

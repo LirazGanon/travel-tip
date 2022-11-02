@@ -38,6 +38,7 @@
 
 .weather>h2 {
     text-align: center;
+    font-size: 1.25em;
 }
 
 .weather>img {
@@ -46,7 +47,23 @@
 }
 
 .locations {
-    overflow: hidden;
+    overflow-y: auto;
+    max-height: 190px;
+}
+
+.locations::-webkit-scrollbar {
+    width: 15px;
+}
+
+.locations::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 0 1px var(--grey3);
+    background: transparent;
+    border-radius: 0 10px 10px 0;
+}
+
+.locations::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px var(--grey3);
 }
 
 .locations>button {
@@ -54,6 +71,9 @@
     padding-block: 6px;
     border-bottom: 1px solid var(--grey3);
     transition: filter .5s;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 .locations>button:hover{
