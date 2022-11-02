@@ -8,6 +8,9 @@ window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
 window.onMenu = onMenu
 window.onAddPlace = onAddPlace
+window.onCloseModal = onCloseModal
+window.omModalClick = omModalClick
+
 
 
 let gMap
@@ -87,6 +90,8 @@ function onAddPlace(ev) {
     mapService.addPlace(name, lat, lng, gMap.getZoom())
     renderPlaces()
     renderMarkers()
+    onCloseModal()
+    ev.target.placeName.value = ''
 }
 
 function renderPlaces() {
@@ -104,7 +109,7 @@ function renderPlaces() {
         `
     }).join('')
 
-    // renderWeather(places[0])
+    renderWeather(places[0])
     // console.log('strHtmls', strHtmls);
     elList.innerHTML = strHtmls
 }
@@ -128,4 +133,12 @@ function renderMarkers() {
             title: name
         })
     })
+}
+
+function onCloseModal(){
+    document.querySelector('body').classList.remove('modal-open')
+}
+
+function omModalClick(ev){
+    ev.stopPropagation()
 }
