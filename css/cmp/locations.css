@@ -2,7 +2,6 @@
     flex-basis: 50%;
 }
 
-
 .weather>h2{
     text-align: center;
 }
@@ -10,5 +9,4 @@
 .weather>img{
     height: 50px;
     width: 50px;
-    
 }
