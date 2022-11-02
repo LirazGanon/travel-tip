@@ -1,3 +1,7 @@
 .weather-locations{
     display: flex;
 }
+
+.weather-locations>*{
+    flex-basis: 50%;
+}

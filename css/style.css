@@ -8,6 +8,7 @@
 @import './cmp/locations.css';
 @import './cmp/footer.css';
 @import './cmp/modal.css';
+@import './media/mini-tablet.css' (min-width: 550px);
 @import './media/tablet.css' (min-width: 800px);
 @import './media/desktop.css'(min-width: 1000px);
 @import './media/xl.css'(min-width: 1220px);

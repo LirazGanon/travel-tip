@@ -8,6 +8,7 @@
 </head>
 <body class="flex col main-layout ">
 
+
     <header class="main-header main-layout full">
         <section class="flex space-between align-center">
             <h1 class="logo">TravelTip</h1>
@@ -28,9 +29,9 @@
     </section>
 
     <main class="main-content">
-
+       
         <section class="weather-locations">
-            <article class="weather flex col align-center">
+            <article class="weather flex col center">
                 <img src="./img/sun.png" alt="">
                 <h2>The weather at 
                     <span class="location">Tokyo</span>
@@ -38,27 +39,22 @@
                      <span class="celsius">32c</span>
                     </h2>
             </article>
-
-            <section class="locations flex col">
-                <button>My Location</button>
-                <ul class="locations-list">
-                    <!-- Render -->
-                    <li class="location-items flex space-between align-center">
-                        <h2>${user input}</h2>
-                        <div class="controls flex">
-                            <button class="flex center" onclick="pal"><ion-icon name="navigate"></ion-icon></button>
-                            <button class="flex center" onclick="deleteee()"><ion-icon name="trash"></ion-icon></button>
-                        </div>
-                    </li>
-                </ul>
-            </section>
-        </section>
-
-        <div id="map" class="map"></div>
-        
+            <section class="locations-container">
+                <button>My Locations <ion-icon name="navigate" class="icon"></ion-icon></button>
+                <section class="locations flex col">
+                    <ul class="locations-list">
+                        <!-- Render -->
+                    </ul>
+                </section>
+                <button class="download">
+                    <a href="#" download="place-list.csv"  onclick="onDownloadCSV(this)">Download <ion-icon name="document-text-outline"></ion-icon></a>
+                    </button>
+                </section>
+                </section>
+                
+                <div id="map" class="map"></div>
+                
         <section class="interactions">
-            <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
-            <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
             <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
             <button onclick="onPanTo()"class="btn-pan">Pan Map to Tokyo</button>
         </section>
@@ -90,6 +86,8 @@
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="lib/axios.js"></script>
     <script type="module" src="js/app.controller.js"></script>
+    <script src="js/testingAPI.js"></script>
 </body>
 </html>

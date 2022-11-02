@@ -1,9 +1,33 @@
 .map{
     width: 100%;
+    min-height: 600px;
     height: auto;
-    min-height: 400px;
+    /* flex: 1; */
 }
 
 .main-content{
     width: 100%;
+    /* flex: 1; */
+}
+
+.my-location{
+    margin-inline: 10px;
+    border: none;
+    display: grid;
+    place-items: center;
+    background-color:#fff ;
+    height: 40px;
+    width: 40px;
+    border-radius: 2px;
+    box-shadow: rgb(0 0 0 / 30%) 0px 1px 4px -1px;
+    cursor: pointer;
+}
+.my-location>img{
+    width: 100%;
+    filter: opacity(.6);
+    transition: .5s;
+}
+.my-location:hover img{
+    filter: opacity(1);
+
 }
