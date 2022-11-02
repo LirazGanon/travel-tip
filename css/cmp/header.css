@@ -21,7 +21,7 @@
 .burger>span {
     width: 40%;
     height: 4px;
-    background: #eee;
+    background: var(--text);
     position: absolute;
     left: 50%;
     transform: translate(-50%, -50%);

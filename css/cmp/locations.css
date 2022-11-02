@@ -1,7 +1,6 @@
 .search-locations {
     margin-block-end: 10px;
     background: var(--break);
- 
 }
 
 .search-locations>form {
@@ -35,9 +34,24 @@
     margin-block: 10px;
     margin-inline:10px ;
 }
+.weather-info{
+    text-align: center;
+    letter-spacing: 0.05em;
 
+}
+.weather-info span{
+    margin-inline: 10px;
+}
+
+.weather-info>*:nth-child(2){
+    margin-block-start:6px;
+}
 .weather{
     gap: 5%;
+    background-color: #9995;
+}
+.weather .pin{
+    transform: rotate(45deg);
 }
 
 .weather>h2 {
@@ -94,15 +108,18 @@
     top: 0;
     z-index: 10;
     cursor: auto;
+    color: var(--text);
 }
 
 .locations>button:hover{
     filter: brightness(.9);
 }
+
 .locations>button .icon{
     transform:translate(0,25%) ;
     transition: .5s;
 }
+
 .locations>button:hover .icon {
    color: #eee;
    text-shadow: 5px 5px #eee;
