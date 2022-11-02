@@ -1,13 +1,24 @@
+import {utilService} from './util.service.js'
+import {storageService} from './storage.service.js'
+
 export const mapService = {
     initMap,
     addMarker,
     panTo,
-    getMap
+    getMap,
+    addPlace,
+    getPlaces
 }
 
 
 // Var that is used throughout this Module (not global)
 let gMap
+let gPlaces =[]
+const STORAGE_KEY_PLACES = 'places'
+
+function getPlaces() {
+    return gPlaces
+}
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
     console.log('InitMap')
@@ -41,7 +52,7 @@ function panTo(lat, lng) {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-   
+
     const API_KEY = ' AIzaSyBTX43qLb5Eha5DhsfCtwbNURcj3m2qqRw' //TODO: Enter your API Key
     var elGoogleApi = document.createElement('script')
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`
@@ -54,10 +65,31 @@ function _connectGoogleApi() {
     })
 }
 
-function getMap(){
+function getMap() {
     console.log(gMap)
     return gMap
 }
 
+function addPlace(name, lat, lng, zoom) {
+    console.log(name, lat, lng, zoom)
+    gPlaces.unshift({ id: utilService.makeId(), lat, lng, name, zoom })
+    _savePlacesToStorage()
+}
+
+function _createPlaces() {
+    const places = storageService.load(STORAGE_KEY_PLACES) || []
+    if (!places || !places.length) {
+        for (let i = 0; i < 3; i++) {
+            const placeName = 'DemoPlace' + (i + 1)
+            places.push(_createPlace(placeName, 33 + i, 35 + i, 10))
+        }
+    }
+    gPlaces = places
+    _savePlacesToStorage()
+}
+
+function _savePlacesToStorage() {
+    storageService.save(STORAGE_KEY_PLACES, gPlaces)
+}
 
 

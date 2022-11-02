@@ -10,13 +10,13 @@ window.onMenu = onMenu
 
 
 let gMap
+let gMarkers = []
 
 function onInit() {
     mapService.initMap()
         .then((res) => {
             gMap = res
             console.log('Map is ready')
-            console.log(gMap)
             addEventListeners()
         })
         .catch(() => console.log('Error: cannot init map'))
@@ -65,16 +65,27 @@ function onPanTo() {
 
 function addEventListeners() {
     gMap.addListener('click', ev => {
-        console.log('ev', ev);
         const name = prompt('Place name?', 'New Place')
-        const { latLng: { lat, lng } } = ev
-        // const { latLng } = ev
-        // const lat = ev.latLng.lat()
-        // const lng = ev.latLng.lng()
-
-        console.log('lat, lng', lat, lng);
-        // addPlace(name, lat, lng, gMap.getZoom())
+        const { latLng } = ev
+        const lat = latLng.lat()
+        const lng = latLng.lng()
+        mapService.addPlace(name, lat, lng, gMap.getZoom())
         // renderPlaces()
-        // renderMarkers()
+        renderMarkers()
+    })
+}
+
+function renderMarkers() {
+    const places = mapService.getPlaces()
+    // remove previous markers
+    gMarkers.forEach(marker => marker.setMap(null))
+    // create a marker for every place
+    gMarkers = places.map(({ lat, lng, name }) => {
+        const coord = { lat, lng }
+        return new google.maps.Marker({
+            position: coord,
+            map: gMap,
+            title: name
+        })
     })
 }
