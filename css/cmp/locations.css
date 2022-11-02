@@ -53,6 +53,11 @@
     font-size: 1.4em;
     padding-block: 6px;
     border-bottom: 1px solid var(--grey3);
+    transition: filter .5s;
+}
+
+.locations>button:hover{
+    filter: invert(.2);
 }
 
 .locations-list>* {

@@ -75,7 +75,7 @@
     </footer>
     
 
-    <section class="modal full flex center">
+    <section class="modal full flex center" onclick="onCloseModal()">
         <article class="add-pointer">
             <form onsubmit="onAddPlace(event)" class="add-form flex col align-center">
                 <label class="add-input">
@@ -84,7 +84,7 @@
                 </label>
                 <button class="flex center">Save Point</button>
             </form>
-            <button>X</button>
+            <button onclick="onCloseModal()">X</button>
         </article>
     </section>
 
