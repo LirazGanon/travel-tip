@@ -50,6 +50,7 @@ body.modal-open .modal{
     border-bottom: 2px solid var(--grey3);
     background: transparent;
     padding: 2px 5px;
+    color: var(--text);
 }
 
 .add-form>button{

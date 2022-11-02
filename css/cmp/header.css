@@ -49,7 +49,7 @@ body.menu-open .burger>span:not(:nth-child(odd)) {
     overflow: hidden;
     padding-inline: 20px;
     border-radius: 0 0 12px 12px;
-    background: linear-gradient(45deg,#eee,#555);
+    background: linear-gradient(45deg,var(--bg),var(--pr-clr));
 }
 
 body.menu-open .themes-list{

@@ -1,99 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TravelTip</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body class="flex col main-layout ">
-
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="flex col main-layout">
 
     <header class="main-header main-layout full">
-        <section class="flex space-between align-center">
-            <h1 class="logo">TravelTip</h1>
-           
-            <div class="burger"  onclick="onMenu()">
-            <span style="--i: -1"></span>
-            <span style="--i: 0"></span>
-            <span style="--i: 1"></span>
-            <ul class="themes-list flex col">
-                <li onclick="onChangeTheme('light')" ></li>
-                <li onclick="onChangeTheme('dark')" ></li>
-                <li onclick="onChangeTheme('warm')" ></li>
-                <li onclick="onChangeTheme('cold')" ></li>
-            </ul>
-            </div>
-        </section>
+      <section class="flex space-between align-center">
+        <h1 class="logo">TravelTip</h1>
+        <div class="burger" onclick="onMenu()">
+          <span style="--i: -1"></span>
+          <span style="--i: 0"></span>
+          <span style="--i: 1"></span>
+          <ul class="themes-list flex col">
+            <li onclick="onChangeTheme('light')"></li>
+            <li onclick="onChangeTheme('dark')"></li>
+            <li onclick="onChangeTheme('warm')"></li>
+            <li onclick="onChangeTheme('cold')"></li>
+          </ul>
+        </div>
+      </section>
     </header>
 
     <section class="search-locations main-layout full">
-        <form onsubmit="//@" class="flex center">
-            <input type="search" name="search" placeholder="Enter Location">
-            <button class="flex center"><ion-icon name="search"></ion-icon></button>
-        </form>
+      <form onsubmit="//@" class="flex center">
+        <input type="search" name="search" placeholder="Enter Location" />
+        <button class="flex center"><ion-icon name="search"></ion-icon></button>
+      </form>
     </section>
 
     <main class="main-content">
-       
-        <section class="weather-locations">
-            <article class="weather flex col center">
-                <img src="./img/sun.png" alt="">
-                <h2>The weather at 
-                    <span class="location">Tokyo</span>
-                     is 
-                     <span class="celsius">32c</span>
-                    </h2>
-            </article>
-            <section class="locations-container">
-                <button>My Locations <ion-icon name="navigate" class="icon"></ion-icon></button>
-                <section class="locations flex col">
-                    <ul class="locations-list">
-                        <!-- Render -->
-                    </ul>
-                </section>
-                <button class="download">
-                    <a href="#" download="place-list.csv"  onclick="onDownloadCSV(this)">Download <ion-icon name="document-text-outline"></ion-icon></a>
-                    </button>
-                </section>
-                </section>
-                
-                <div id="map" class="map"></div>
-                
-        <section class="interactions">
-            <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
-            <button onclick="onPanTo()"class="btn-pan">Pan Map to Tokyo</button>
+      <section class="weather-locations">
+        <article class="weather flex col center">
+          <img src="./img/sun.png" alt="" />
+          <h2>
+            The weather at
+            <span class="location">Tokyo</span>
+            is
+            <span class="celsius">32c</span>
+          </h2>
+        </article>
+        <section class="locations-container">
+          <button>
+            My Locations <ion-icon name="navigate" class="icon"></ion-icon>
+          </button>
+          <section class="locations flex col">
+            <ul class="locations-list">
+              <!-- Render -->
+            </ul>
+          </section>
+          <button class="download">
+            <a href="#" download="place-list.csv" onclick="onDownloadCSV(this)"
+              >Download <ion-icon name="document-text-outline"></ion-icon
+            ></a>
+          </button>
         </section>
+      </section>
+      <div id="map" class="map"></div>
     </main>
 
-    
-    <p>You are at: <span class="user-pos"></span></p>
-    <p>Locations: 
-        <pre class="locs"></pre>
-    </p>
-
     <footer class="full flex center">
-        <small>right reserved &copy;</small>
+      <small>right reserved &copy;</small>
     </footer>
-    
 
     <section class="modal full flex center" onclick="onCloseModal()">
-        <article class="add-pointer">
-            <form onsubmit="onAddPlace(event)" class="add-form flex col align-center" onclick="omModalClick(event)">
-                <label class="add-input">
-                    <input type="text" placeholder="My Location"
-                    name="placeName" required>
-                </label>
-                <button class="flex center">Save Point</button>
-            </form>
-            <button onclick="onCloseModal()">X</button>
-        </article>
+      <article class="add-pointer">
+        <form
+          onsubmit="onAddPlace(event)"
+          class="add-form flex col align-center"
+          onclick="omModalClick(event)"
+        >
+          <label class="add-input">
+            <input
+              type="text"
+              placeholder="My Location"
+              name="placeName"
+              required
+            />
+          </label>
+          <button class="flex center">Save Point</button>
+        </form>
+        <button onclick="onCloseModal()">X</button>
+      </article>
     </section>
 
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
     <script src="lib/axios.js"></script>
     <script type="module" src="js/app.controller.js"></script>
     <script src="js/testingAPI.js"></script>
-</body>
+  </body>
 </html>
