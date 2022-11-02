@@ -18,6 +18,8 @@ function onInit() {
             gMap = res
             console.log('Map is ready')
             addEventListeners()
+            renderPlaces() 
+            renderMarkers()
         })
         .catch(() => console.log('Error: cannot init map'))
 }
@@ -70,10 +72,36 @@ function addEventListeners() {
         const lat = latLng.lat()
         const lng = latLng.lng()
         mapService.addPlace(name, lat, lng, gMap.getZoom())
-        // renderPlaces()
+        renderPlaces()
         renderMarkers()
     })
 }
+
+function renderPlaces() {
+    const places = mapService.getPlaces()
+    const elList = document.querySelector('.locations-list')
+    const strHtmls = places.map(({ id, name}) => {
+        return `
+    <li class="location-items flex space-between align-center">
+        <h2>${name}</h2 >
+        <div class="controls flex">
+            <button class="flex center" onclick="onPanToPlace('${id}')"><ion-icon name="navigate"></ion-icon></button>
+            <button class="flex center" onclick="onRemovePlace('${id}')"><ion-icon name="trash"></ion-icon></button>
+        </div>
+    </li>
+        `
+    }).join('')
+
+    renderWeather(places[0])
+    // console.log('strHtmls', strHtmls);
+    elList.innerHTML = strHtmls
+}
+
+function renderWeather({name,temp:weather}) {
+    document.querySelector('.location').innerText = name
+    document.querySelector('.celsius').innerText = temp+'°'
+}
+
 
 function renderMarkers() {
     const places = mapService.getPlaces()

@@ -1,5 +1,5 @@
-import {utilService} from './util.service.js'
-import {storageService} from './storage.service.js'
+import { utilService } from './util.service.js'
+import { storageService } from './storage.service.js'
 
 export const mapService = {
     initMap,
@@ -12,9 +12,11 @@ export const mapService = {
 
 
 // Var that is used throughout this Module (not global)
-let gMap
-let gPlaces =[]
 const STORAGE_KEY_PLACES = 'places'
+
+let gMap
+let gPlaces
+_createPlaces()
 
 function getPlaces() {
     return gPlaces
@@ -72,7 +74,7 @@ function getMap() {
 
 function addPlace(name, lat, lng, zoom) {
     console.log(name, lat, lng, zoom)
-    gPlaces.unshift({ id: utilService.makeId(), lat, lng, name, zoom })
+    gPlaces.unshift({ id: utilService.makeId(), lat, lng, name, zoom, weather: utilService.getRandomInt(25, 36), createdAt: Date.now(), updatedAt: Date.now() })
     _savePlacesToStorage()
 }
 
@@ -81,9 +83,15 @@ function _createPlaces() {
     if (!places || !places.length) {
         for (let i = 0; i < 3; i++) {
             const placeName = 'DemoPlace' + (i + 1)
-            places.push(_createPlace(placeName, 33 + i, 35 + i, 10))
+            places.push(_createPlace(placeName, 32 + i * 0.1, 35 + i * 0.1, 10))
         }
     }
+
+    function _createPlace(name, lat, lng, zoom) {
+        return { id: utilService.makeId(), lat, lng, name, zoom, weather: utilService.getRandomInt(25, 36), createdAt: Date.now(), updatedAt: Date.now() }
+    }
+
+
     gPlaces = places
     _savePlacesToStorage()
 }
