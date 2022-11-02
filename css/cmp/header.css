@@ -1,0 +1,35 @@
+.main-header {
+    background: var(--pr-clr);
+    height: 95px;
+}
+.main-header > h1{
+    align-self: center;
+}
+
+.burger {
+    height: 90px;
+    width: 90px;
+    position: relative;
+    cursor: pointer;
+}
+
+.burger>* {
+    width: 40%;
+    height: 4px;
+    background: #eee;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: calc(12px * var(--i) + 50%);
+    border-radius: 25px;
+    transition: .5s;
+}
+
+body.menu-open .burger>*:not(:nth-child(even)) {
+    transform: translate(-50%, -50%) rotate(-45deg);
+    top: 50%;
+}
+
+body.menu-open .burger>*:not(:nth-child(odd)) {
+    transform: translate(-50%, -50%) rotate(45deg);
+}

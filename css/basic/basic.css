@@ -1,0 +1,22 @@
+*{
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+
+
+html{
+    font-family: lato;
+    color: var(--text);
+}
+
+body{
+    background: var(--bg);
+    min-height: 100vh;
+}
+
+button{
+    border: none;
+    background: var(--pr-clr);
+}
+
