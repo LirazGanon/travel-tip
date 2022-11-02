@@ -1,12 +1,13 @@
 :root {
 
+    /* classic */
     --text: #333;
     --bg: #eee;
-
-    --grey1: #555;
-    --grey3: #777;
-
+    --break: #555;
     --pr-clr: #85c446;
+    
+
+    --grey3: #999;
 
     --xl: 1200px;
     --l: 980px;

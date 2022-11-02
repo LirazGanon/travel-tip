@@ -1,6 +1,7 @@
 .main-header {
     background: var(--pr-clr);
     height: 95px;
+    z-index: 20;
 }
 .main-header > h1{
     align-self: center;
@@ -17,7 +18,7 @@
     cursor: pointer;
 }
 
-.burger>* {
+.burger>span {
     width: 40%;
     height: 4px;
     background: #eee;
@@ -29,11 +30,53 @@
     transition: .5s;
 }
 
-body.menu-open .burger>*:not(:nth-child(even)) {
+body.menu-open .burger>span:not(:nth-child(even)) {
     transform: translate(-50%, -50%) rotate(-45deg);
     top: 50%;
 }
 
-body.menu-open .burger>*:not(:nth-child(odd)) {
+body.menu-open .burger>span:not(:nth-child(odd)) {
     transform: translate(-50%, -50%) rotate(45deg);
 }
+
+.themes-list{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 106%;
+    height: 0;
+    transition: .5s;
+    overflow: hidden;
+    padding-inline: 20px;
+    border-radius: 0 0 12px 12px;
+    background: linear-gradient(45deg,#eee,#555);
+}
+
+body.menu-open .themes-list{
+    height:210px ;
+}
+
+.themes-list li{
+    min-height: 40px;
+    width: 40px;
+    border-radius: 8px;
+    margin-block: 6px;
+}
+
+.themes-list li:first-child{
+    background: linear-gradient( 45deg, #eee,#85c446);
+    color: #333;
+}
+.themes-list li:nth-child(2){
+    background: linear-gradient( 45deg, #333,#82b541);
+    color: #eee;
+}
+.themes-list li:nth-child(3){
+    background: linear-gradient( 45deg, #eee,#fdca30);
+    color: #333;
+}
+.themes-list li:last-child{
+    background: linear-gradient( 45deg, steelblue,#999);
+    color: #eee;
+}
+   
