@@ -1,7 +1,8 @@
 export const mapService = {
     initMap,
     addMarker,
-    panTo
+    panTo,
+    getMap
 }
 
 
@@ -18,6 +19,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 center: { lat, lng },
                 zoom: 15
             })
+            return gMap
             console.log('Map!', gMap)
         })
 }
@@ -51,3 +53,11 @@ function _connectGoogleApi() {
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
 }
+
+function getMap(){
+    console.log(gMap)
+    return gMap
+}
+
+
+

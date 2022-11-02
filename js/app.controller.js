@@ -6,13 +6,24 @@ window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
+window.onMenu = onMenu
+
+
+let gMap
 
 function onInit() {
     mapService.initMap()
-        .then(() => {
+        .then((res) => {
+            gMap = res
             console.log('Map is ready')
+            console.log(gMap)
+            addEventListeners()
         })
         .catch(() => console.log('Error: cannot init map'))
+}
+
+function onMenu() {
+    document.querySelector('body').classList.toggle('menu-open')
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
@@ -50,4 +61,20 @@ function onGetUserPos() {
 function onPanTo() {
     console.log('Panning the Map')
     mapService.panTo(35.6895, 139.6917)
+}
+
+function addEventListeners() {
+    gMap.addListener('click', ev => {
+        console.log('ev', ev);
+        const name = prompt('Place name?', 'New Place')
+        const { latLng: { lat, lng } } = ev
+        // const { latLng } = ev
+        // const lat = ev.latLng.lat()
+        // const lng = ev.latLng.lng()
+
+        console.log('lat, lng', lat, lng);
+        // addPlace(name, lat, lng, gMap.getZoom())
+        // renderPlaces()
+        // renderMarkers()
+    })
 }
