@@ -7,10 +7,12 @@ window.onPanTo = onPanTo
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
 window.onMenu = onMenu
+window.onAddPlace = onAddPlace
 
 
 let gMap
 let gMarkers = []
+let gCurrCoords
 
 function onInit() {
     mapService.initMap()
@@ -18,7 +20,7 @@ function onInit() {
             gMap = res
             console.log('Map is ready')
             addEventListeners()
-            renderPlaces() 
+            renderPlaces()
             renderMarkers()
         })
         .catch(() => console.log('Error: cannot init map'))
@@ -67,20 +69,30 @@ function onPanTo() {
 
 function addEventListeners() {
     gMap.addListener('click', ev => {
-        const name = prompt('Place name?', 'New Place')
+        const body = document.querySelector('body')
+        body.classList.add('modal-open')
+        document.querySelector('.add-input').focus()
         const { latLng } = ev
         const lat = latLng.lat()
         const lng = latLng.lng()
-        mapService.addPlace(name, lat, lng, gMap.getZoom())
-        renderPlaces()
-        renderMarkers()
+        gCurrCoords = { lat, lng }
+
     })
+}
+
+function onAddPlace(ev) {
+    ev.preventDefault()
+    const name = ev.target.placeName.value
+    const { lat, lng } = gCurrCoords
+    mapService.addPlace(name, lat, lng, gMap.getZoom())
+    renderPlaces()
+    renderMarkers()
 }
 
 function renderPlaces() {
     const places = mapService.getPlaces()
     const elList = document.querySelector('.locations-list')
-    const strHtmls = places.map(({ id, name}) => {
+    const strHtmls = places.map(({ id, name }) => {
         return `
     <li class="location-items flex space-between align-center">
         <h2>${name}</h2 >
@@ -97,9 +109,9 @@ function renderPlaces() {
     elList.innerHTML = strHtmls
 }
 
-function renderWeather({name,temp:weather}) {
+function renderWeather({ name, weather: temp }) {
     document.querySelector('.location').innerText = name
-    document.querySelector('.celsius').innerText = temp+'°'
+    document.querySelector('.celsius').innerText = temp + '°'
 }
 
 
