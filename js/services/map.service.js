@@ -10,7 +10,9 @@ export const mapService = {
     getPlaces,
     removePlace,
     getPlaceById,
-    askForWeather
+    askForWeather,
+    askForLocation,
+    getPlacesAsCSV
 }
 
 
@@ -130,9 +132,24 @@ function askForWeather(lat, lng) {
     })
 }
 
-function askForLocation(lat,lon){
-    const API = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=AIzaSyB-AIzaSyBTX43qLb5Eha5DhsfCtwbNURcj3m2qqRw`
-    
-    return axios.get(API).then(console.log)
+function askForLocation(placeName) {
+    const API = `https://maps.googleapis.com/maps/api/geocode/json?address=${placeName}&key=AIzaSyBTX43qLb5Eha5DhsfCtwbNURcj3m2qqRw`
+    return axios.get(API)
+        .then(({ data }) => {
+            let results = {
+                name: data.results[0].formatted_address,
+                lat: data.results[0].geometry.location.lat,
+                lng: data.results[0].geometry.location.lng
+            }
+            return results
+        })
 }
+
+function getPlacesAsCSV(){
+    if(!gPlaces.length) return 'No Places'
+    const csv = gPlaces.map(({name,lat,lon})=>`${name},${lat},${lon}\n`)
+    csv.unshift('Name,Latitude ,Longitude\n')
+    return csv.join('')
+}
+
 

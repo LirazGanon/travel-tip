@@ -13,6 +13,9 @@ window.omModalClick = omModalClick
 window.onRemovePlace = onRemovePlace
 window.onPanToPlace = onPanToPlace
 window.onPanToUserLoc = onPanToUserLoc
+window.onSearch = onSearch
+window.onDownloadCSV = onDownloadCSV
+window.onChangeTheme = onChangeTheme
 
 
 
@@ -121,6 +124,15 @@ function renderPlaces() {
     elList.innerHTML = strHtmls
 }
 
+function onSearch(ev){
+    ev.preventDefault()
+    mapService.askForLocation(ev.target.search.value).then(res=>{
+        console.log(res)
+        renderWeather(res)
+        gMap.setCenter({ lat: res.lat, lng: res.lng })
+        gMap.setZoom(12)
+    })
+}
 
 function renderWeather({ name, lat, lng }) {
     mapService.askForWeather(lat, lng).then(res => {
@@ -181,4 +193,25 @@ function onCloseModal() {
 
 function omModalClick(ev) {
     ev.stopPropagation()
+}
+
+function onDownloadCSV(elLink){
+    const csv = mapService.getPlacesAsCSV()
+    elLink.href = 'data:text/csv;charset=utf-8,' + csv
+}
+
+const themes = {
+    light:{text:'#333333',bg:'#eeeeee',break:'#555555',prColor:'#85c446'},
+    dark:{text:'#eeeeee',bg:'#333333',break:'#e5e5e5',prColor:'#82b541'},
+    warm:{text:'#333333',bg:'#eeeeee',break:'#555555',prColor:'#fdca30'},
+    cold:{text:'#eeeeee',bg:'#4682b4',break:'#2c2b2b',prColor:'#999999'},
+}
+
+function onChangeTheme(theme){
+    const curTheme = themes[theme]
+    if(!curTheme) return
+    document.documentElement.style.setProperty('--text', curTheme.text);
+    document.documentElement.style.setProperty('--bg', curTheme.bg);
+    document.documentElement.style.setProperty('--break', curTheme.break);
+    document.documentElement.style.setProperty('--pr-clr', curTheme.prColor);
 }
