@@ -19,6 +19,7 @@ button{
     border: none;
     background: var(--pr-clr);
     cursor: pointer;
+    font-family: lato-bold;
 }
 
 img{
