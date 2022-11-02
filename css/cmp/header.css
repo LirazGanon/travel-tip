@@ -9,8 +9,19 @@
 
 .logo{
     padding-inline-start:10px ;
+    font-size: 2.2em;
+    font-family: CarterOne;
+    letter-spacing: 0.05em;
+    color: #333;
+}
+.logo span{
+    color: #eee;
 }
 
+.logo span::after{
+    content: '.';
+    color: var(--bg);
+}
 .burger {
     height: 90px;
     width: 90px;
@@ -49,7 +60,8 @@ body.menu-open .burger>span:not(:nth-child(odd)) {
     overflow: hidden;
     padding-inline: 20px;
     border-radius: 0 0 12px 12px;
-    background: linear-gradient(45deg,var(--bg),var(--pr-clr));
+    background: var(--pr-clr);
+    box-shadow: inset 0 3px var(--bg) ;
 }
 
 body.menu-open .themes-list{

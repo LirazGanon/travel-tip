@@ -6,7 +6,8 @@
     font-family: lato-bold;
     src: url('./Lato-Bold.ttf');
 }
+
 @font-face {
-    font-family: alkalami;
-    src: url('./Alkalami-Regular.ttf');
+    font-family: CarterOne;
+    src: url('./CarterOne-Regular.ttf');
 }

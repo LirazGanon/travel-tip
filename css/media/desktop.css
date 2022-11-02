@@ -17,3 +17,6 @@
 .weather-locations{
     display: block;
 }
+.locations {
+    max-height: auto;
+}
