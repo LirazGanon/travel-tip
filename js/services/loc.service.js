@@ -1,5 +1,5 @@
 export const locService = {
-    getLocs
+    getLocs,
 }
 
 
