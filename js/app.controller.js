@@ -1,5 +1,6 @@
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
+import { cssService } from './services/css.service.js'
 
 window.onload = onInit
 window.onAddMarker = onAddMarker
@@ -127,8 +128,9 @@ function renderPlaces() {
 
         document.querySelector('.location').innerText =' No Places'
         document.querySelector('.celsius').innerText = '-'
-        document.querySelector('.weather img').src = './img/no.png'
+        document.querySelector('.weather img').src = '../img/no.png'
         document.querySelector('.weather-desc').innerText = ''
+        return
     } 
 
 
@@ -211,8 +213,15 @@ function onDownloadCSV(elLink) {
     elLink.href = 'data:text/csv;charset=utf-8,' + csv
 }
 
+const themes = {
+    light: { text: '#333333', bg: '#eeeeee', break: '#555555', prColor: '#85c446' },
+    dark: { text: '#eeeeee', bg: '#333333', break: '#e5e5e5', prColor: '#82b541' },
+    warm: { text: '#333333', bg: '#eeeeee', break: '#555555', prColor: '#fdca30' },
+    cold: { text: '#eeeeee', bg: '#4682b4', break: '#2c2b2b', prColor: '#999999' },
+}
+
 function onChangeTheme(theme) {
-    const chosenTheme = changeTheme(theme)
+    const curTheme = themes[theme]
     if (!curTheme) return
     document.documentElement.style.setProperty('--text', chosenTheme.text);
     document.documentElement.style.setProperty('--bg', chosenTheme.bg);
