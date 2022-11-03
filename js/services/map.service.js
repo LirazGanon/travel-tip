@@ -140,7 +140,7 @@ function askForLocation(placeName) {
 
 function getPlacesAsCSV() {
     if (!gPlaces.length) return 'No Places'
-    const csv = gPlaces.map(({ name, lat, lon }) => `${name},${lat},${lng}\n`)
+    const csv = gPlaces.map(({ name, lat, lng }) => `${name},${lat},${lng}\n`)
     csv.unshift('Name,Latitude ,Longitude\n')
     return csv.join('')
 }
