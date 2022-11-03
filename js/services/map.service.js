@@ -1,5 +1,6 @@
 import { utilService } from './util.service.js'
 import { storageService } from './storage.service.js'
+import { locService } from './loc.service.js'
 
 export const mapService = {
     initMap,
@@ -85,10 +86,8 @@ function addPlace(name, lat, lng, zoom) {
     console.log(name, lat, lng, zoom)
     const currPlace = { id: utilService.makeId(), lat, lng, name, zoom, createdAt: Date.now(), updatedAt: Date.now() }
     gPlaces.unshift(currPlace)
-    askForWeather(lat, lng).then(res => {
-        currPlace.weather = Math.round(res.temp)
-        _savePlacesToStorage()
-    })
+    _savePlacesToStorage()
+
 }
 
 function removePlace(placeId) {
@@ -97,22 +96,16 @@ function removePlace(placeId) {
 }
 
 function _createPlaces() {
-    const places = storageService.load(STORAGE_KEY_PLACES) || []
+    let places = storageService.load(STORAGE_KEY_PLACES)
     if (!places || !places.length) {
-        for (let i = 0; i < 3; i++) {
-            const placeName = 'DemoPlace' + (i + 1)
-            const currPlace = _createPlace(placeName, 32 + i * 0.1, 35 + i * 0.1, 10)
-            places.push(currPlace)
-            askForWeather(32 + i * 0.1, 35 + i * 0.1).then(res => {
-                currPlace.weather = Math.round(res.temp)
-                _savePlacesToStorage()
-            })
-        }
+        const newPlaces = locService.getLocs()
+        places = newPlaces.map(({ name, lat, lng }) => _createPlace(name, lat, lng))
     }
     gPlaces = places
+    _savePlacesToStorage()
 }
 
-function _createPlace(name, lat, lng, zoom) {
+function _createPlace(name, lat, lng, zoom = 15) {
     return { id: utilService.makeId(), lat, lng, name, zoom, createdAt: Date.now(), updatedAt: Date.now() }
 }
 
@@ -145,9 +138,9 @@ function askForLocation(placeName) {
         })
 }
 
-function getPlacesAsCSV(){
-    if(!gPlaces.length) return 'No Places'
-    const csv = gPlaces.map(({name,lat,lon})=>`${name},${lat},${lon}\n`)
+function getPlacesAsCSV() {
+    if (!gPlaces.length) return 'No Places'
+    const csv = gPlaces.map(({ name, lat, lon }) => `${name},${lat},${lon}\n`)
     csv.unshift('Name,Latitude ,Longitude\n')
     return csv.join('')
 }
