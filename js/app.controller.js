@@ -120,13 +120,23 @@ function renderPlaces() {
         `
     }).join('')
 
-    renderWeather(places[0])
+
     elList.innerHTML = strHtmls
+    if (places.length === 0){
+
+        document.querySelector('.location').innerText =' No Places'
+        document.querySelector('.celsius').innerText = '-'
+        document.querySelector('.weather img').src = '../img/no.png'
+        document.querySelector('.weather-desc').innerText = ''
+    } 
+
+
+    renderWeather(places[0])
 }
 
-function onSearch(ev){
+function onSearch(ev) {
     ev.preventDefault()
-    mapService.askForLocation(ev.target.search.value).then(res=>{
+    mapService.askForLocation(ev.target.search.value).then(res => {
         console.log(res)
         renderWeather(res)
         gMap.setCenter({ lat: res.lat, lng: res.lng })
@@ -195,21 +205,21 @@ function omModalClick(ev) {
     ev.stopPropagation()
 }
 
-function onDownloadCSV(elLink){
+function onDownloadCSV(elLink) {
     const csv = mapService.getPlacesAsCSV()
     elLink.href = 'data:text/csv;charset=utf-8,' + csv
 }
 
 const themes = {
-    light:{text:'#333333',bg:'#eeeeee',break:'#555555',prColor:'#85c446'},
-    dark:{text:'#eeeeee',bg:'#333333',break:'#e5e5e5',prColor:'#82b541'},
-    warm:{text:'#333333',bg:'#eeeeee',break:'#555555',prColor:'#fdca30'},
-    cold:{text:'#eeeeee',bg:'#4682b4',break:'#2c2b2b',prColor:'#999999'},
+    light: { text: '#333333', bg: '#eeeeee', break: '#555555', prColor: '#85c446' },
+    dark: { text: '#eeeeee', bg: '#333333', break: '#e5e5e5', prColor: '#82b541' },
+    warm: { text: '#333333', bg: '#eeeeee', break: '#555555', prColor: '#fdca30' },
+    cold: { text: '#eeeeee', bg: '#4682b4', break: '#2c2b2b', prColor: '#999999' },
 }
 
-function onChangeTheme(theme){
+function onChangeTheme(theme) {
     const curTheme = themes[theme]
-    if(!curTheme) return
+    if (!curTheme) return
     document.documentElement.style.setProperty('--text', curTheme.text);
     document.documentElement.style.setProperty('--bg', curTheme.bg);
     document.documentElement.style.setProperty('--break', curTheme.break);
