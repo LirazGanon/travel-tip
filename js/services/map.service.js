@@ -13,7 +13,8 @@ export const mapService = {
     getPlaceById,
     askForWeather,
     askForLocation,
-    getPlacesAsCSV
+    getPlacesAsCSV,
+    changeTheme
 }
 
 
@@ -146,3 +147,21 @@ function getPlacesAsCSV() {
 }
 
 
+const STORAGE_KEY_USER_PREF = 'userPref'
+
+let gUserPref = storageService.load(STORAGE_KEY_USER_PREF) || 'light'
+
+const themes = {
+    light: { text: '#333333', bg: '#eeeeee', break: '#555555', prColor: '#85c446' },
+    dark: { text: '#eeeeee', bg: '#333333', break: '#e5e5e5', prColor: '#82b541' },
+    warm: { text: '#333333', bg: '#eeeeee', break: '#555555', prColor: '#fdca30' },
+    cold: { text: '#eeeeee', bg: '#4682b4', break: '#2c2b2b', prColor: '#999999' },
+}
+
+
+function changeTheme(theme){
+    console.log(theme);
+    gUserPref = theme
+    storageService.save(STORAGE_KEY_USER_PREF,gUserPref)
+    return themes[theme]
+}
