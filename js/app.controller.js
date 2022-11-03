@@ -128,6 +128,7 @@ function renderPlaces() {
         document.querySelector('.celsius').innerText = '-'
         document.querySelector('.weather img').src = '../img/no.png'
         document.querySelector('.weather-desc').innerText = ''
+        return
     } 
 
 
