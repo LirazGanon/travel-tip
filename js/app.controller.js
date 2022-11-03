@@ -126,7 +126,7 @@ function renderPlaces() {
 
         document.querySelector('.location').innerText =' No Places'
         document.querySelector('.celsius').innerText = '-'
-        document.querySelector('.weather img').src = '../img/no.png'
+        document.querySelector('.weather img').src = './img/no.png'
         document.querySelector('.weather-desc').innerText = ''
         return
     } 
